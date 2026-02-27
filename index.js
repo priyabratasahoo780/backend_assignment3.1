@@ -40,13 +40,13 @@ let states = [
 ];
 
 
-//    GET ROUTES
+
+//        GET ROUTES
 
 // 1. GET /states
 app.get("/states", (req, res) => {
   res.status(200).json(states);
 });
-
 
 // 3. GET /states/highest-gdp
 app.get("/states/highest-gdp", (req, res) => {
@@ -61,8 +61,7 @@ app.get("/states/highest-gdp", (req, res) => {
   res.status(200).json(highest);
 });
 
-
-// 2. GET /states/:id
+// 2. GET /states/:id  (Generic dynamic route LAST)
 app.get("/states/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const state = states.find(s => s.id === id);
@@ -75,7 +74,9 @@ app.get("/states/:id", (req, res) => {
 });
 
 
-//    POST ROUTE 
+// =
+//        POST ROUTE
+
 
 // 4. POST /states
 app.post("/states", (req, res) => {
@@ -90,8 +91,8 @@ app.post("/states", (req, res) => {
   res.status(201).json(newState);
 });
 
+//        PUT ROUTES
 
-//    PUT ROUTES  (Specific routes FIRST)
 
 // 6. PUT /states/:id/budget
 app.put("/states/:id/budget", (req, res) => {
@@ -104,7 +105,6 @@ app.put("/states/:id/budget", (req, res) => {
   res.status(200).json(state);
 });
 
-
 // 7. PUT /states/:id/population
 app.put("/states/:id/population", (req, res) => {
   const id = parseInt(req.params.id);
@@ -116,8 +116,7 @@ app.put("/states/:id/population", (req, res) => {
   res.status(200).json(state);
 });
 
-
-// 5. PUT /states/:id
+// 5. PUT /states/:id  (Generic dynamic route LAST)
 app.put("/states/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = states.findIndex(s => s.id === id);
@@ -131,7 +130,8 @@ app.put("/states/:id", (req, res) => {
 });
 
 
-//    PATCH ROUTES  (Specific routes FIRST)
+
+//        PATCH ROUTE
 
 //8. PATCH /states/:id/literacy
 app.patch("/states/:id/literacy", (req, res) => {
@@ -144,7 +144,6 @@ app.patch("/states/:id/literacy", (req, res) => {
   res.status(200).json(state);
 });
 
-
 // 9. PATCH /states/:id/gdp
 app.patch("/states/:id/gdp", (req, res) => {
   const id = parseInt(req.params.id);
@@ -156,8 +155,7 @@ app.patch("/states/:id/gdp", (req, res) => {
   res.status(200).json(state);
 });
 
-
-// 10. PATCH /states/:id
+// 10. PATCH /states/:id  (dynamic route LAST)
 app.patch("/states/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const state = states.find(s => s.id === id);
@@ -169,7 +167,8 @@ app.patch("/states/:id", (req, res) => {
 });
 
 
-//    DELETE ROUTES  (Specific routes FIRST)
+//        DELETE ROUTES
+
 
 //12. DELETE /states/name/:stateName
 app.delete("/states/name/:stateName", (req, res) => {
@@ -182,7 +181,6 @@ app.delete("/states/name/:stateName", (req, res) => {
   res.status(204).send();
 });
 
-
 // 13. DELETE /states/low-literacy/:percentage
 app.delete("/states/low-literacy/:percentage", (req, res) => {
   const percentage = parseFloat(req.params.percentage);
@@ -194,8 +192,7 @@ app.delete("/states/low-literacy/:percentage", (req, res) => {
   res.status(200).json({ deletedCount });
 });
 
-
-// 11. DELETE /states/:id
+// 11. DELETE /states/:id  (dynamic route LAST)
 app.delete("/states/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = states.findIndex(s => s.id === id);
