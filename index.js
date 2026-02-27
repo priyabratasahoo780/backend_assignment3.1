@@ -8,8 +8,7 @@ app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 
-
-const states = [
+let states = [
   { id: 1, name: "Andhra Pradesh", population: 49386799, literacyRate: 67.02, annualBudget: 279279, gdp: 14000000 },
   { id: 2, name: "Arunachal Pradesh", population: 1383727, literacyRate: 65.38, annualBudget: 28000, gdp: 300000 },
   { id: 3, name: "Assam", population: 31205576, literacyRate: 72.19, annualBudget: 122000, gdp: 4500000 },
@@ -64,7 +63,6 @@ app.get("/states/highest-gdp", (req, res) => {
 
 
 // 2. GET /states/:id
-
 app.get("/states/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const state = states.find(s => s.id === id);
@@ -76,10 +74,10 @@ app.get("/states/:id", (req, res) => {
   res.status(200).json(state);
 });
 
+
 //    POST ROUTE 
 
 // 4. POST /states
-
 app.post("/states", (req, res) => {
   const newId = states.length > 0
     ? Math.max(...states.map(s => s.id)) + 1
@@ -92,7 +90,8 @@ app.post("/states", (req, res) => {
   res.status(201).json(newState);
 });
 
-//    PUT ROUTES
+
+//    PUT ROUTES  (Specific routes FIRST)
 
 // 6. PUT /states/:id/budget
 app.put("/states/:id/budget", (req, res) => {
@@ -106,8 +105,7 @@ app.put("/states/:id/budget", (req, res) => {
 });
 
 
-// 7. 
-// PUT /states/:id/population
+// 7. PUT /states/:id/population
 app.put("/states/:id/population", (req, res) => {
   const id = parseInt(req.params.id);
   const state = states.find(s => s.id === id);
@@ -132,7 +130,8 @@ app.put("/states/:id", (req, res) => {
   res.status(200).json(states[index]);
 });
 
-//    PATCH ROUTES
+
+//    PATCH ROUTES  (Specific routes FIRST)
 
 //8. PATCH /states/:id/literacy
 app.patch("/states/:id/literacy", (req, res) => {
@@ -169,7 +168,8 @@ app.patch("/states/:id", (req, res) => {
   res.status(200).json(state);
 });
 
-//    DELETE ROUTES
+
+//    DELETE ROUTES  (Specific routes FIRST)
 
 //12. DELETE /states/name/:stateName
 app.delete("/states/name/:stateName", (req, res) => {
@@ -186,11 +186,11 @@ app.delete("/states/name/:stateName", (req, res) => {
 // 13. DELETE /states/low-literacy/:percentage
 app.delete("/states/low-literacy/:percentage", (req, res) => {
   const percentage = parseFloat(req.params.percentage);
+
   const originalLength = states.length;
-
   states = states.filter(s => s.literacyRate >= percentage);
-
   const deletedCount = originalLength - states.length;
+
   res.status(200).json({ deletedCount });
 });
 
