@@ -6,8 +6,6 @@ app.use(express.json());
 app.use(cors());
 
 const PORT = process.env.PORT || 3000;
-
-
 let states = [
   { id: 1, name: "Andhra Pradesh", population: 49386799, literacyRate: 67.02, annualBudget: 279279, gdp: 14000000 },
   { id: 2, name: "Arunachal Pradesh", population: 1383727, literacyRate: 65.38, annualBudget: 28000, gdp: 300000 },
